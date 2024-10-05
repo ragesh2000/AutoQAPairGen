@@ -1,6 +1,8 @@
 from langchain_unstructured import UnstructuredLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+import copy
 
-def extract(file_path):
+def extract(file_path, context_window=1000):
 
     loader = UnstructuredLoader(
         file_path=file_path,
@@ -39,11 +41,31 @@ def extract(file_path):
 
     # merge title and content by /n
     structured_data = [doc for doc in structured_data if "content" in doc]
+    final_data = []
 
     for doc in structured_data:
         try:
-            doc["content"] = doc["title"] + "\n" + doc["content"]
-            doc.pop("title")
+            added_content = "\n".join([doc["title"], doc["content"]])
+            if len(added_content) > context_window:
+                header = doc["title"]
+                text_splitter = RecursiveCharacterTextSplitter(chunk_size=context_window, chunk_overlap=0, separators=["\n\n",".", ",", "\n"])
+                splitted_content = text_splitter.split_text(doc["content"])
+            
+                for split in splitted_content:
+                    # Create a copy of doc to avoid modifying the original reference
+                    new_doc = copy.deepcopy(doc)
+                    new_doc["content"] = "\n".join([header, split])
+                    try:
+                        new_doc.pop("title")
+                    except:
+                        pass
+                    final_data.append(new_doc)
+
+            else:
+                doc["content"] = doc["title"] + "\n" + doc["content"]
+                doc.pop("title")
+                final_data.append(doc)
+        
         except:
             pass
-    return structured_data
+    return final_data

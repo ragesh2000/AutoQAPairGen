@@ -1,0 +1,6 @@
+unstructured[all-docs]
+torch==2.4.1
+torchvision==0.19.1
+langchain-unstructured==0.1.5
+transformers==4.45.1
+qwen-vl-utils

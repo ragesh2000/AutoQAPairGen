@@ -27,12 +27,17 @@ conda activate qa-gen
 pip install -r requirements.txt
 ```
 ### 4. Run the application
+
+You can run the application with the following command:
+
 ```bash
-python run.py
+python run.py  -category <text/vision>
 ```
+*Note: The `-category` is an optional argument to specify whether you are processing data for a language model (text) or a vision model (vision). If not provided, the system will default to processing data for a language model.*
+
 ## Usage 
 1. Run the application
-2. Provide the path for the unstructured data
-3. Provide the schema for the question-answer pairs
+2. Provide the path for the unstructured data (currently only pdf is supported)
+3. Provide the schema for the question-answer pairs (eg: {'user': question, 'bot': answer})
 4. The application will generate the question-answer pairs based on the schema
 

@@ -13,13 +13,8 @@ tokenizer = AutoTokenizer.from_pretrained("microsoft/Phi-3.5-mini-instruct")
 
 sys_prompt = """You are a smart assistant designed to help data creation tasks.\nGiven a piece of context , you must come up with a question and answer pair that can be used to train a language model"""
 
-# messages = [
-#     {"role": "system", "content": "You are a smart assistant designed to help data creation tasks.\nGiven a piece of context , you must come up with a question and answer pair that can be used to train a language model"},
-#     {"role": "user", "content": ''}
-# ]
-
 def format_string(schema, context):
-    s = f"Come up with question/answer pair using the context provided, in the following format:\n```{schema}```\n\nEverything between the ``` must be valid json. Output should not contain anything more than this json.\n Context: {context}"
+    s = f"Come up with question/answer pairs using the context provided, in the following format:\n```{schema}```\n\nEverything between the ``` must be valid json. Output should not contain anything more than this json.\n Context: {context}"
     return s
 
 
@@ -46,5 +41,4 @@ def main(data_json, schema):
         output = pipe(messages, **generation_args)
         return (output[0]['generated_text'])
     except Exception as e:
-        print(e)
         return None

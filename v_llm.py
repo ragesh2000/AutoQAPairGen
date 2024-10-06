@@ -19,7 +19,7 @@ messages = [
 ]
 
 def format_string(schema, context):
-    s = f"Come up with question/answer pair using the context and image provided, in the following format:\n```{schema}```\n\nEverything between the ``` must be valid json. Output should not contain anything more than this json.\n Context: {context}"
+    s = f"Come up with question/answer pairs using the context and image provided, in the following format:\n```{schema}```\n\nEverything between the ``` must be valid json. Output should not contain anything more than this json.\n Context: {context}"
     return s
 
 

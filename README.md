@@ -21,8 +21,8 @@ To get started, follow these steps:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/QA-SchemaGen.git
-cd QA-SchemaGen
+git clone https://github.com/ragesh2000/AutoQAPairGen.git
+cd AutoQAPairGen
 ```
 ### 2. Create a virtual environment
 ```bash

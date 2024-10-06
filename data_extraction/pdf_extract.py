@@ -2,7 +2,7 @@ from langchain_unstructured import UnstructuredLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import copy
 
-def extract(file_path, context_window=1000):
+def extract(file_path, context_window=4000):
 
     loader = UnstructuredLoader(
         file_path=file_path,
@@ -29,9 +29,12 @@ def extract(file_path, context_window=1000):
 
         elif doc.metadata.get("category") in ['NarrativeText', 'ListItem']:
             try:
-                curent_dic["content"] += doc.page_content
-            except:
-                curent_dic["content"] = doc.page_content
+                try:
+                    curent_dic["content"] += doc.page_content
+                except:
+                    curent_dic["content"] = doc.page_content
+            except UnboundLocalError:
+                curent_dic = {'image': [], 'title': '', 'content': doc.page_content}
 
         elif doc.metadata.get("category") == "Image":
             imagepath = doc.metadata.get("image_path")
@@ -69,3 +72,4 @@ def extract(file_path, context_window=1000):
         except:
             pass
     return final_data
+

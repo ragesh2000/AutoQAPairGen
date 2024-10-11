@@ -2,6 +2,8 @@
 
 AutoQAPairGen is a system designed to simplify the process of preparing data for fine-tuning machine learning models. It generates question-answer pairs from unstructured data (such as PDFs) based on user-defined schemas. This tool allows you to convert unstructured data into a structured format that aligns with your schema, making it easier to prepare data for training or fine-tuning both language and vision models.
 
+Read more about the project here: [blog](https://medium.com/@ragesh66kr/revolutionizing-data-preparation-for-fine-tuning-with-autoqapairgen-2a4f9cf9b2a8)
+
 ## Features
 - Generate question-answer pairs from unstructured data (including PDFs) based on custom schemas.
 - Capable of chunking data without losing continuity, ensuring seamless processing of large or complex documents.
